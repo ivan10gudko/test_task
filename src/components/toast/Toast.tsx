@@ -4,7 +4,7 @@ import styles from "./Toast.module.css";
 
 export type ToastType = "success" | "error" | "warning" | "info";
 
-interface Props {
+export interface ToastProps {
     message: string;
     type?: ToastType;
     duration?: number;
@@ -19,7 +19,7 @@ const icons = {
     info: <IoMdInformationCircle color="#3498db" size={24}/>,
 };
 
-const Toast: React.FC<Props>= ({message, type = "info", duration = 3000, onClose, closeButton=true}) => {
+const Toast: React.FC<ToastProps>= ({message, type = "info", duration = 3000, onClose, closeButton=true}) => {
     const [isClosing, setIsClosing] = useState<boolean>(false);
 
     function startClosingAnimation(){

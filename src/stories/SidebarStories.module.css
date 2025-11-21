@@ -1,0 +1,35 @@
+.pageWrapper {
+    min-height: 100vh;
+    background: #f9f9f9;
+    font-family: sans-serif;
+}
+
+.header {
+    padding: 20px;
+    background: white;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.openBtn {
+    padding: 8px 16px;
+    cursor: pointer;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.openBtn:hover {
+    background: #555;
+}
+
+.mainContent {
+    padding: 20px;
+    line-height: 1.6;
+    color: #333;
+}

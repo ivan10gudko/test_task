@@ -3,7 +3,7 @@ import { LuEye, LuEyeOff } from "react-icons/lu";
 import { IoMdClose } from "react-icons/io";
 import styles from "./Input.module.css";
 
-interface Props {
+export interface InputProps {
     
     value: string | number;
     onChange: (value: string) => void;
@@ -15,9 +15,9 @@ interface Props {
     disabled?: boolean;
 }
 
-const Input: React.FC<Props> = ({type = "text", clearable = false, label, placeholder = "", value, onChange, disabled}) => {
+const Input: React.FC<InputProps> = ({type = "text", clearable = false, label, placeholder = "", value, onChange, disabled}) => {
 
-    const [inputType, setInputType] = useState<Props["type"]>(type);
+    const [inputType, setInputType] = useState<InputProps["type"]>(type);
     
     const currentType = type === "password" && inputType === "text" ? "text" : inputType;
 

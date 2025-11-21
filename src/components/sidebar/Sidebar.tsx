@@ -2,7 +2,7 @@ import { IoMdClose } from "react-icons/io";
 import styles from "./Sidebar.module.css";
 import { MenuItem, type MenuItemType } from "./MenuItem";
 
-interface SidebarProps {
+export interface SidebarProps {
     isOpen: boolean;
     onClose: () => void;
     menuItems: MenuItemType[];
