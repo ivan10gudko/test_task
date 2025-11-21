@@ -12,14 +12,51 @@ const meta: Meta<typeof Toast> = {
         layout: "centered",
     },
     argTypes: {
-        type: {
-            control: "select",
-            options: ["success", "error", "warning", "info"],
-        },
-    duration: { control: "number" },
-    closeButton: { control: "boolean" },
-},
-} satisfies Meta<typeof Toast>;
+    
+    message: {
+      description: 'The text content of the notification',
+      control: 'text',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+
+    type: {
+      description: 'The visual style of the toast indicating the severity',
+      control: 'select',
+      options: ["success", "error", "warning", "info"],
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: '"info"' },
+      },
+    },
+
+    duration: {
+      description: 'Time in milliseconds before the toast auto-dismisses',
+      control: 'number',
+      table: {
+        type: { summary: 'number' },
+        defaultValue: { summary: '3000' },
+      },
+    },
+
+    closeButton: {
+      description: 'Whether to display the "X" close button',
+      control: 'boolean',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
+      },
+    },
+
+    onClose: {
+      description: 'Callback function triggered when the toast is closed',
+      action: 'closed',
+      table: {
+        type: { summary: '() => void' },
+      },
+    },
+}} satisfies Meta<typeof Toast>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

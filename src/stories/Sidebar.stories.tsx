@@ -10,9 +10,33 @@ const meta: Meta<typeof Sidebar> = {
     parameters: {
         layout: "fullscreen",
     },
-    argTypes: {
-        isOpen: { control: "boolean" },
+    argTypes: {    
+        isOpen: {
+            description: 'Controls the visibility of the sidebar',
+            control: 'boolean',
+            table: {
+                type: { summary: 'boolean' },
+                defaultValue: { summary: 'false' },
+        },
     },
+
+        onClose: {
+            description: 'Callback function triggered when the sidebar requests to close (e.g., clicking overlay)',
+            action: 'closed',
+            table: {
+                type: { summary: '() => void' },
+            },
+        },
+
+        menuItems: {
+            description: 'Array of navigation items. Supports nested children.',
+            control: 'object',
+            table: {
+                type: { summary: 'MenuItemType[]' },
+        },
+    },
+    },
+    tags:["autodocs"]
 } satisfies Meta<typeof Sidebar>;
 
 export default meta;

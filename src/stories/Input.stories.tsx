@@ -3,22 +3,75 @@ import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Input, { type InputProps } from '../components/input/Input';
 
-
 const meta = {
   title: 'Input/Input',
   component: Input,
   tags: ['autodocs'],
-  argTypes:{
-  placeholder: { control: "text" },
-  type: { control: "select", options: ["password", "text", "email", "number"] },
-  clearable: { control: "boolean" },
-}
+  argTypes: {
 
-} satisfies Meta<typeof Input>;
+    value: {
+      description: 'Input field value (controlled)',
+      control: 'text',
+      table: {
+        type: { summary: 'string | number' },
+        defaultValue: { summary: '""' },
+      },
+    },
+    
+    onChange: {
+      description: 'Callback function triggered on input change',
+      control: false,
+      table: {
+        type: { summary: '(value: string) => void' },
+      },
+    },
+
+    type: {
+      description: 'HTML type of the input element',
+      control: 'select',
+      options: ['text', 'password', 'email', 'number'],
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: '"text"' },
+      },
+    },
+
+    label: {
+      description: 'Text label displayed above the field',
+      control: 'text',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+
+    placeholder: {
+      description: 'Placeholder text inside the field',
+      control: 'text',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+
+    clearable: {
+      description: 'Whether to show the clear button (X)',
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+
+    disabled: {
+      description: 'Whether the field is disabled',
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+  }
+} satisfies Meta<typeof Input>; // FIXED: Removed the extra curly brace here
 
 export default meta;
 type Story = StoryObj<typeof meta>;
-
 
 const InputWrapper = (args: Partial<InputProps>) => {
   const [value, setValue] = useState(args.value || "");
@@ -71,6 +124,7 @@ export const NumberInput: Story = {
 interface FormValues {
   email: string;
 }
+
 const RHFDemo = () => {
   const { control, handleSubmit } = useForm({
     defaultValues: { email: "" },

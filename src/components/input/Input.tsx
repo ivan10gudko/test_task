@@ -4,10 +4,8 @@ import { IoMdClose } from "react-icons/io";
 import styles from "./Input.module.css";
 
 export interface InputProps {
-    
     value: string | number;
     onChange: (value: string) => void;
-    
     type?: "password" | "text" | "email" | "number";
     clearable?: boolean;
     label?: string;
