@@ -5,3 +5,23 @@
     padding: 2em;
     width: 40em;
 }
+
+
+.toastContainer {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9999;
+}
+
+.btn{
+    padding: 0.5em 1.5em;
+    background: #fff;
+    border: 1px solid black;
+    border-radius: 12px;
+    margin: 0.5em;
+}
+

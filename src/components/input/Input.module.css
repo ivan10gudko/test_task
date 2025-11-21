@@ -3,12 +3,19 @@
     flex-direction: column;
     gap: 6px;
     width: 100%;
+    position: relative;
 }
 
 label {
     font-size: 14px;
     font-weight: 500;
     color: #333;
+    position: absolute;
+    top:-9px;
+    left: 20px;
+    z-index: 50;
+    background-color: #fff;
+    padding:  0 5px;
 }
 
 .inputWrapper {
@@ -18,8 +25,8 @@ label {
 
 .input {
     width: 100%;
-    padding: 10px 12px;
-    font-size: 15px;
+    padding: 10px 8px 10px 22px;
+    font-size: 12px;
     border: 1px solid #cfcfcf;
     border-radius: 8px;
     outline: none;

@@ -11,12 +11,7 @@ interface Props {
     placeholder?: string;
 }
 
-const Input: React.FC<Props> = ({
-    type = "text",
-    clearable = false,
-    label,
-    placeholder = "",
-}) => {
+const Input: React.FC<Props> = ({type = "text", clearable = false, label, placeholder = ""}) => {
     const [value, setValue] = useState<string>("");
     const [inputType, setInputType] = useState<Props["type"]>(type);
 
