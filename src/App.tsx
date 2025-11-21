@@ -3,6 +3,8 @@ import Input from "./components/input/Input"
 import type { ToastType } from "./components/toast/Toast";
 import styles from "./Main.module.css";
 import Toast from "./components/toast/Toast";
+import type { MenuItemType } from "./components/sidebar/MenuItem";
+import Sidebar from "./components/sidebar/Sidebar";
 
 interface ToastMessage {
   id: number;
@@ -10,8 +12,34 @@ interface ToastMessage {
   type: ToastType;
   closeButton:boolean;
 }
+
+const menu: MenuItemType[] = [
+  { label: "Home", link: "/" },
+  {
+    label: "Menu item 1",
+    children: [
+      { label: "Submenu item 1", link: "/example" },
+      {
+        label: "Submenu item 2",
+        children: [
+          { label: "Item 1", link: "/example" },
+          { label: "Item 2", link: "/example" },
+        ],
+      },
+    ],
+  },
+  {label: "Menu item 2",
+    children: [
+      { label: "Submenu item 1", link: "/example" },
+      { label: "Submenu item 2", link: "/example" },
+    ]
+    }
+];
+
 function App() {
-const [toasts, setToasts] = useState<ToastMessage[]>([]);
+  
+  const [toasts, setToasts] = useState<ToastMessage[]>([]);
+  const [open, setOpen] = useState(false);
 
   function addToast(message: string, type: ToastType){
     const id = Date.now();
@@ -27,7 +55,18 @@ const [toasts, setToasts] = useState<ToastMessage[]>([]);
   };
 
   return (
-  <div>
+  <div className={styles.main}>
+      <header className={styles.header}>
+        <div className="font-bold">LOGO</div>
+        <button onClick={() => setOpen(true)}>☰</button>
+      </header>
+
+      <Sidebar
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        menuItems={menu}
+      />
+
     <div className={styles.inputContainer}>
       <Input type="password" label="Password"/>
       <Input type="number" label="Number"/>
@@ -36,7 +75,7 @@ const [toasts, setToasts] = useState<ToastMessage[]>([]);
       <Input type="number" label="Number " clearable/>
       <Input type="email" label="Email" placeholder="example@email.com" clearable/>
     </div>
-    <div>
+    <div className={styles.toastController}>
       <h1>Toast test</h1>
       <button className={styles.btn} onClick={() => addToast("Success", "success")}>
         Show Success

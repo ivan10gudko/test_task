@@ -1,0 +1,28 @@
+.menuItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    cursor: pointer;
+    color: #333;
+    transition: background 0.2s;
+    user-select: none;
+}
+
+.menuItem:hover {
+    background-color: #f5f5f5;
+}
+
+.chevron {
+    transition: transform 0.2s;
+}
+
+.chevronExpanded {
+    transform: rotate(180deg);
+}
+
+.submenuContainer {
+    margin-left: 16px;
+    border-left: 2px solid #ddd;
+    padding-left: 12px;
+}
