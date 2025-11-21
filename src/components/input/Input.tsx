@@ -1,56 +1,64 @@
 import { useState } from "react";
 import { LuEye, LuEyeOff } from "react-icons/lu";
 import { IoMdClose } from "react-icons/io";
-
 import styles from "./Input.module.css";
 
 interface Props {
-    type: "password" | "text" | "email" | "number";
+    
+    value: string | number;
+    onChange: (value: string) => void;
+    
+    type?: "password" | "text" | "email" | "number";
     clearable?: boolean;
     label?: string;
     placeholder?: string;
+    disabled?: boolean;
 }
 
-const Input: React.FC<Props> = ({type = "text", clearable = false, label, placeholder = ""}) => {
-    const [value, setValue] = useState<string>("");
+const Input: React.FC<Props> = ({type = "text", clearable = false, label, placeholder = "", value, onChange, disabled}) => {
+
     const [inputType, setInputType] = useState<Props["type"]>(type);
+    
+    const currentType = type === "password" && inputType === "text" ? "text" : inputType;
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>){
         const val = e.target.value;
-    
+
         if (type === "number") {
-            if (/^-?\d*\.?\d*$/.test(val)) {
-                setValue(val);
+            if (val === '' || /^-?\d*\.?\d*$/.test(val)) {
+                onChange(val);
             }
             return;
         }
 
-        setValue(val);
-    };
+        onChange(val);
+    }
 
-    function  handleClear(){
-        setValue("");
-    };
+    function handleClear(){
+        onChange("");
+    }
 
     function togglePasswordVisibility(){
         setInputType((prev) => (prev === "password" ? "text" : "password"));
-    };
+    }
+
 
     return (
         <div className={styles.wrapper}>
-            {label && <label>{label}</label>}
+            {label && <label className={styles.label}>{label}</label>}
 
             <div className={styles.inputWrapper}>
                 <input
-                    type={inputType}
+                    type={currentType}
                     value={value}
                     onChange={handleChange}
                     className={styles.input}
                     placeholder={placeholder}
+                    disabled={disabled}
                 />
 
                 <div className={styles.controls}>
-                    {clearable && value.length > 0 && (
+                    {clearable && value.toString().length > 0 && !disabled && (
                         <button type="button" onClick={handleClear} className={styles.clearBtn}>
                             <IoMdClose />
                         </button>
@@ -62,13 +70,13 @@ const Input: React.FC<Props> = ({type = "text", clearable = false, label, placeh
                             onClick={togglePasswordVisibility}
                             className={styles.visibilityBtn}
                         >
-                            {inputType === "password" ? <LuEye /> : <LuEyeOff />}
+                            {currentType === "text" ? <LuEyeOff /> : <LuEye />}
                         </button>
                     )}
                 </div>
             </div>
-    </div>
-);
+        </div>
+    );
 }
 
 export default Input;

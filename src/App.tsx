@@ -37,9 +37,15 @@ const menu: MenuItemType[] = [
 ];
 
 function App() {
+  const [password, setPassword] = useState("");
+  const [numberVal, setNumberVal] = useState("");
+  const [textVal, setTextVal] = useState("");
+  const [emailVal, setEmailVal] = useState("");
   
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
   const [open, setOpen] = useState(false);
+
+  
 
   function addToast(message: string, type: ToastType){
     const id = Date.now();
@@ -68,12 +74,37 @@ function App() {
       />
 
     <div className={styles.inputContainer}>
-      <Input type="password" label="Password"/>
-      <Input type="number" label="Number"/>
-      <Input type="text" label="Text"/>
-      <Input type="password" label="Password" clearable/>
-      <Input type="number" label="Number " clearable/>
-      <Input type="email" label="Email" placeholder="example@email.com" clearable/>
+        <Input
+            type="password"
+            label="Password"
+            value={password}
+            onChange={setPassword}
+            clearable
+        />
+
+        <Input
+            type="number"
+            label="Number"
+            value={numberVal}
+            onChange={setNumberVal}
+            clearable
+        />
+
+        <Input
+            type="text"
+            label="Text"
+            value={textVal}
+            onChange={setTextVal}
+        />
+
+        <Input
+            type="email"
+            label="Email"
+            placeholder="example@email.com"
+            value={emailVal}
+            onChange={setEmailVal}
+            clearable
+        />
     </div>
     <div className={styles.toastController}>
       <h1>Toast test</h1>
